@@ -1,0 +1,359 @@
+{
+ "posts": {
+  "reel": {
+   "capa": {
+    "file": "media/reel-capa.jpg"
+   },
+   "createdAt": "2026-11-06T21:00:01Z",
+   "data": "2026-11-11",
+   "drive": "",
+   "hora": "18:30",
+   "legenda": "Confie em você. Fortaleça você. Escolha você. 🤍\n\nUm lembrete para a mulher que ainda se coloca em último lugar: cuidar de quem você é não é vaidade, é honrar quem Deus criou.\n\nEnvie para uma amiga que precisa ouvir isso hoje. ✨\n\n#EstiloComAlma #Autoestima #ImagemPessoal #MulheresEmLondres",
+   "midias": [
+    {
+     "file": "media/reel.mp4",
+     "kind": "video"
+    }
+   ],
+   "notas": "Capa nova sendo criada a partir do prompt de imagem.",
+   "pilar": "Imagem com alma",
+   "status": "revisao",
+   "tipo": "reel",
+   "titulo": "Confie em você"
+  },
+  "c2": {
+   "capa": null,
+   "createdAt": "2026-11-06T21:00:02Z",
+   "data": "2026-11-16",
+   "drive": "",
+   "hora": "18:30",
+   "legenda": "Mesma roupa, outra mensagem. 🐚\n\nUm colar de pérolas, um chapéu, uma bolsa: às vezes é o detalhe que transforma a produção inteira. Arraste e compare o antes e o depois.\n\nQual transformação mais te surpreendeu: 1, 2 ou 3? Me conta aqui embaixo.\n\n#EstiloComAlma #Acessórios #ImagemPessoal #Styling",
+   "midias": [
+    {
+     "file": "media/c2-1.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c2-2.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c2-3.jpg",
+     "kind": "image"
+    }
+   ],
+   "notas": "Existe uma versão alternativa das artes (pasta “Estilo Instagram”). Para trocar, envie os arquivos dela neste post.",
+   "pilar": "Estilo na prática",
+   "status": "revisao",
+   "tipo": "carrossel",
+   "titulo": "Os acessórios fazem diferença"
+  },
+  "c3": {
+   "capa": null,
+   "createdAt": "2026-11-06T21:00:03Z",
+   "data": "2026-11-18",
+   "drive": "",
+   "hora": "18:30",
+   "legenda": "Você mudou. Seu guarda-roupa acompanhou?\n\nUma cor, um tecido, um acessório: cada escolha conta um pouco de quem você é e de quem você está se tornando. Vestir-se com intenção começa por se conhecer.\n\nAo se olhar no espelho, o que você gostaria de reconhecer em si? Me conta nos comentários. 🤍\n\n#EstiloComAlma #Autoconhecimento #ImagemComPropósito #ConsultoriaDeImagem",
+   "midias": [
+    {
+     "file": "media/c3-1.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c3-2.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c3-3.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c3-4.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c3-5.jpg",
+     "kind": "image"
+    }
+   ],
+   "notas": "",
+   "pilar": "Imagem com alma",
+   "status": "revisao",
+   "tipo": "carrossel",
+   "titulo": "Uma cor, um tecido, um acessório"
+  },
+  "c1": {
+   "capa": null,
+   "createdAt": "2026-11-06T21:00:00Z",
+   "data": "2026-11-13",
+   "drive": "",
+   "hora": "18:30",
+   "legenda": "Antes de escolher a roupa, escolha a mensagem. ✨\n\nCor e combinação falam antes de você: autoridade, leveza, presença, criatividade. Arraste para o lado e veja o que cada escolha comunica.\n\nE me conta nos comentários: o que você quer transmitir com a sua imagem? 🤍\n\nSalve para consultar antes de se vestir.\n\n#EstiloComAlma #ConsultoriaDeImagem #ImagemPessoal #PsicologiaDasCores",
+   "midias": [
+    {
+     "file": "media/c1-1.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c1-2.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c1-3.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c1-4.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c1-5.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c1-6.jpg",
+     "kind": "image"
+    },
+    {
+     "file": "media/c1-7.jpg",
+     "kind": "image"
+    }
+   ],
+   "notas": "",
+   "pilar": "Estilo na prática",
+   "status": "revisao",
+   "tipo": "carrossel",
+   "titulo": "O que eu vestiria se quisesse transmitir…"
+  }
+ },
+ "destaques": {
+  "max": {
+   "capa": null,
+   "cta": "",
+   "etapa": "conectar",
+   "nome": "Max",
+   "objetivo": "Juntar com Bastidores.",
+   "ordem": 10,
+   "status": "arquivar",
+   "stories": []
+  },
+  "gym": {
+   "capa": null,
+   "cta": "",
+   "etapa": "conectar",
+   "nome": "Gym",
+   "objetivo": "Juntar com Bastidores.",
+   "ordem": 11,
+   "status": "arquivar",
+   "stories": []
+  },
+  "perolas": {
+   "capa": null,
+   "cta": "",
+   "etapa": "confiar",
+   "nome": "Pérolas",
+   "objetivo": "Juntar com O Despertar.",
+   "ordem": 9,
+   "status": "arquivar",
+   "stories": []
+  },
+  "mentoria": {
+   "capa": null,
+   "cta": "Comenta MENTORIA",
+   "etapa": "comprar",
+   "nome": "Mentoria",
+   "objetivo": "Explicar a Mentoria Estilo com Alma e levar a interessada para a lista de espera.",
+   "ordem": 2,
+   "status": "manter",
+   "stories": [
+    {
+     "ok": false,
+     "t": "Para quem é a mentoria"
+    },
+    {
+     "ok": false,
+     "t": "Como funcionam os encontros"
+    },
+    {
+     "ok": true,
+     "t": "Bastidores das aulas"
+    },
+    {
+     "ok": false,
+     "t": "Falas de alunas"
+    },
+    {
+     "ok": false,
+     "t": "Próxima turma ou lista de espera"
+    }
+   ]
+  },
+  "depoimentos": {
+   "capa": null,
+   "cta": "Quer viver isso também? Me chama",
+   "etapa": "confiar",
+   "nome": "Depoimentos",
+   "objetivo": "Mostrar resultados reais de mulheres que passaram pelo trabalho da Dani.",
+   "ordem": 3,
+   "status": "manter",
+   "stories": [
+    {
+     "ok": true,
+     "t": "Prints de mensagens de alunas"
+    },
+    {
+     "ok": false,
+     "t": "Vídeos curtos de depoimento"
+    },
+    {
+     "ok": false,
+     "t": "Antes e depois com autorização"
+    }
+   ]
+  },
+  "reflexoes": {
+   "capa": null,
+   "cta": "",
+   "etapa": "conectar",
+   "nome": "Reflexões",
+   "objetivo": "As reflexões funcionam melhor como posts no feed. Avaliar se viram série de posts.",
+   "ordem": 8,
+   "status": "arquivar",
+   "stories": []
+  },
+  "bastidores": {
+   "capa": null,
+   "cta": "",
+   "etapa": "conectar",
+   "nome": "Bastidores",
+   "objetivo": "Juntar Max, Gym e vida em Londres em um só lugar para gerar conexão.",
+   "ordem": 7,
+   "status": "criar",
+   "stories": [
+    {
+     "ok": false,
+     "t": "Rotina com o Max"
+    },
+    {
+     "ok": false,
+     "t": "Treino e autocuidado"
+    },
+    {
+     "ok": false,
+     "t": "Lugares em Londres"
+    }
+   ]
+  },
+  "despertar": {
+   "capa": null,
+   "cta": "Entre na lista de espera da próxima edição",
+   "etapa": "confiar",
+   "nome": "O Despertar",
+   "objetivo": "Reunir o evento O Despertar da Pérola (inclui o conteúdo de Pérolas) e alimentar a próxima edição.",
+   "ordem": 4,
+   "status": "manter",
+   "stories": [
+    {
+     "ok": true,
+     "t": "Recap de 03.10"
+    },
+    {
+     "ok": true,
+     "t": "Palestrantes"
+    },
+    {
+     "ok": false,
+     "t": "Falas do público"
+    },
+    {
+     "ok": false,
+     "t": "Lista de espera da próxima edição"
+    }
+   ]
+  },
+  "styling": {
+   "capa": null,
+   "cta": "Salve e me conta qual dica você vai testar",
+   "etapa": "conhecer",
+   "nome": "Styling",
+   "objetivo": "Dicas práticas de estilo que mostram o método da Dani.",
+   "ordem": 6,
+   "status": "manter",
+   "stories": [
+    {
+     "ok": false,
+     "t": "Uma roupa, três mensagens"
+    },
+    {
+     "ok": false,
+     "t": "Acessórios que mudam o look"
+    },
+    {
+     "ok": false,
+     "t": "Cores e o que transmitem"
+    }
+   ]
+  },
+  "sobre": {
+   "capa": null,
+   "cta": "Me conta no direct o que você quer transmitir com a sua imagem",
+   "etapa": "conhecer",
+   "nome": "Sobre mim",
+   "objetivo": "Em poucos stories, quem chega entende quem é a Dani, para quem ela trabalha e por que confiar nela.",
+   "ordem": 1,
+   "status": "criar",
+   "stories": [
+    {
+     "ok": false,
+     "t": "Quem eu sou e como cheguei a Londres"
+    },
+    {
+     "ok": false,
+     "t": "Para quem é o meu trabalho"
+    },
+    {
+     "ok": false,
+     "t": "Fé e propósito por trás do Estilo com Alma"
+    },
+    {
+     "ok": false,
+     "t": "Como trabalhar comigo"
+    }
+   ]
+  },
+  "palcos": {
+   "capa": null,
+   "cta": "Quer a Dani no seu evento? Me chama",
+   "etapa": "confiar",
+   "nome": "Palcos",
+   "objetivo": "Reforçar autoridade com palestras e participações.",
+   "ordem": 5,
+   "status": "manter",
+   "stories": [
+    {
+     "ok": true,
+     "t": "Palestras e participações"
+    },
+    {
+     "ok": false,
+     "t": "Trechos com melhor fala"
+    }
+   ]
+  }
+ },
+ "perfil": {
+  "main": {
+   "avatar": {
+    "file": "media/avatar.jpg"
+   },
+   "bio": "👗 Consultora de Imagem\n🎤 Palestrante | Londres 🇬🇧\n🤍 Eu trabalho com mulheres, não com roupas.\n🐚 Criadora d’O Despertar da Pérola\n👇 Mentoria",
+   "link": "[link com opções]",
+   "nome": "Dani Merighe | Estilo com Alma",
+   "posts": 402,
+   "seguidores": "1.957",
+   "seguindo": "1.549",
+   "usuario": "danimerighe"
+  }
+ }
+}
