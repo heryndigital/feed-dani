@@ -530,9 +530,13 @@ function upcoming(days){const t=todayISO(),e=iso(addDays(new Date(),days)),y=new
 const BLANK="data:image/gif;base64,R0lGODlhAQABAAAAACw=",imgCache={},imgWait={};
 function imgSrc(id){if(imgCache[id])return imgCache[id];if(!imgWait[id]&&db){imgWait[id]=db.collection("arquivos").doc(id).get().then(d=>{if(d.exists){imgCache[id]=d.data().data;render();if(ui.sel){mbox();refreshPrev()}const ph=$("#fphone");if(ph&&ui.route==="feed")ph.innerHTML=phoneInner("f")}}).catch(()=>{delete imgWait[id]})}return BLANK}
 const src=m=>!m?"":m.file?m.file:m.img?imgSrc(m.img):"";
-function cover(p){if(p.capa&&src(p.capa))return{src:src(p.capa),kind:"image"};const ms=p.midias||[];const im=ms.find(m=>m.kind!=="video");if(im)return{src:src(im),kind:"image"};if(ms[0])return{src:src(ms[0]),kind:"video"};return null}
+const driveId=u=>{const m=String(u||"").match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:[^#]*&)?id=|thumbnail\?(?:[^#]*&)?id=)([\w-]{20,})/);return m?m[1]:""};
+const linkThumb=u=>{u=String(u||"").trim();const id=driveId(u);if(id)return`https://drive.google.com/thumbnail?id=${id}&sz=w1080`;return /^https?:\/\/\S+\.(jpe?g|png|webp|gif)(\?\S*)?$/i.test(u)?u:""};
+function cover(p){if(p.capa&&src(p.capa))return{src:src(p.capa),kind:"image"};const ms=p.midias||[];const im=ms.find(m=>m.kind!=="video");if(im)return{src:src(im),kind:"image"};if(ms[0])return{src:src(ms[0]),kind:"video"};const lt=linkThumb(p.drive);if(lt)return{src:lt,kind:"image"};return null}
+function dthumbHTML(u){const lt=linkThumb(u);if(!lt)return u&&/^https?:/.test(u)?"Para gerar a capa sozinha, cole o link do <b>arquivo</b> (não da pasta) e deixe o compartilhamento como “Qualquer pessoa com o link”.":"";
+  return `<div style="display:flex;gap:12px;align-items:center"><img src="${esc(lt)}" alt="" referrerpolicy="no-referrer" style="width:72px;height:96px;object-fit:cover;border-radius:8px;border:1px solid var(--line)" onerror="this.parentNode.innerHTML='Não consegui ler a capa: confira se o arquivo está como “Qualquer pessoa com o link”.'"><span>Capa automática tirada do link. Se você enviar uma imagem acima, ela passa a ser a capa.</span></div>`}
 function coverHTML(p){const c=cover(p);if(!c)return `<div class="placeholder" aria-hidden="true">${esc((p.titulo||"?").trim().charAt(0).toUpperCase())}</div>`;
-  return c.kind==="video"?`<video src="${esc(c.src)}#t=0.5" muted playsinline preload="metadata"></video>`:`<img src="${esc(c.src)}" alt="" loading="lazy">`}
+  return c.kind==="video"?`<video src="${esc(c.src)}#t=0.5" muted playsinline preload="metadata"></video>`:`<img src="${esc(c.src)}" alt="" loading="lazy" referrerpolicy="no-referrer">`}
 function hlCover(d){return d.capa&&src(d.capa)?`<img src="${esc(src(d.capa))}" alt="">`:`<span>${esc((d.nome||"?").trim().charAt(0).toUpperCase())}</span>`}
 
 /* ---------- dados ---------- */
@@ -746,7 +750,9 @@ function phoneFeedHTML(){const P=perfil(),l=feedList(),act=dests().filter(d=>d.s
 function phonePostHTML(p,st){const P=perfil(),ms=p.midias||[],n=ms.length;if(st.slide>=n)st.slide=0;const m=ms[st.slide];
   const isReel=p.tipo==="reel"||(n===1&&m&&m.kind==="video");
   let h=`<div class="ph"><img src="${esc(P.avatar?src(P.avatar):"media/avatar.jpg")}" alt=""><div><b>${esc(P.usuario)}</b>${p.data?`<small>${fmtLong(p.data)}${p.hora?" · "+esc(p.hora):""}</small>`:""}</div></div>`;
-  if(!n)h+=`<div class="media"><div class="nofile">Nenhum arquivo ainda.<br>Adicione imagens ou vídeo ao post.</div></div>`;
+  const lt=!n?linkThumb(p.drive):"";
+  if(!n&&lt)h+=`<div class="media ${isReel?"reel":""}"><img src="${esc(lt)}" alt="Capa gerada pelo link" referrerpolicy="no-referrer"></div>`;
+  else if(!n)h+=`<div class="media"><div class="nofile">Nenhum arquivo ainda.<br>Adicione imagens ou vídeo ao post.</div></div>`;
   else{h+=`<div class="media ${isReel?"reel":""}" data-swipe>`+(m.kind==="video"?`<video src="${esc(src(m))}" ${p.capa?`poster="${esc(src(p.capa))}"`:""} muted loop autoplay playsinline controls></video>`:`<img src="${esc(src(m))}" alt="Arquivo ${st.slide+1} de ${n}">`)
     +(n>1?`<span class="cnt">${st.slide+1}/${n}</span>`:"")+(st.slide>0?`<button class="nav p" data-a="prev" aria-label="Anterior">‹</button>`:"")+(st.slide<n-1?`<button class="nav n" data-a="next" aria-label="Próximo">›</button>`:"")+`</div>`;
     if(n>1)h+=`<div class="dots">${ms.map((_,i)=>`<i class="${i===st.slide?"on":""}"></i>`).join("")}</div>`}
@@ -848,7 +854,7 @@ function buildDrawer(){const p=S.posts.get(ui.sel);if(!p){closeEditor();return}c
         <div><label class="lbl" for="f-hora">Horário</label><input type="time" id="f-hora" data-f="hora" value="${esc(p.hora)}" ${ro}></div></div>
       <div><label class="lbl" for="f-pilar">Pilar de conteúdo</label><select id="f-pilar" data-f="pilar" ${dis}><option value="">Sem pilar</option>${PILARES.map(x=>`<option ${p.pilar===x?"selected":""}>${esc(x)}</option>`).join("")}</select></div></div></section>
     <section class="blk"><span class="bn">02</span><div class="bc"><h4>Arquivos</h4><div id="mbox"></div>
-      <div><label class="lbl" for="f-drive">Original no Google Drive</label><div class="drive"><input type="url" id="f-drive" data-f="drive" value="${esc(p.drive)}" placeholder="Cole o link da pasta ou do arquivo" ${ro}><a class="btn small" id="drivego" href="${esc(/^https?:\/\//.test(p.drive||"")?p.drive:"#")}" target="_blank" rel="noopener" ${/^https?:\/\//.test(p.drive||"")?"":"hidden"}>Abrir</a></div></div></div></section>
+      <div><label class="lbl" for="f-drive">Original no Google Drive</label><div class="drive"><input type="url" id="f-drive" data-f="drive" value="${esc(p.drive)}" placeholder="Cole o link da pasta ou do arquivo" ${ro}><a class="btn small" id="drivego" href="${esc(/^https?:\/\//.test(p.drive||"")?p.drive:"#")}" target="_blank" rel="noopener" ${/^https?:\/\//.test(p.drive||"")?"":"hidden"}>Abrir</a></div><div id="drivethumb" class="tip" style="margin-top:10px">${dthumbHTML(p.drive)}</div></div></div></section>
     <section class="blk"><span class="bn">03</span><div class="bc"><h4>Legenda</h4><textarea id="f-leg" data-f="legenda" rows="11" aria-label="Legenda" ${ro}>${esc(p.legenda)}</textarea>
       <div class="capfoot"><span class="count" id="lcnt"></span><button class="btn small" id="copyl">Copiar legenda</button></div>
       <div><span class="lbl">Aparece antes do “mais”</span><div class="fold" id="fold"></div></div></div></section>
@@ -858,7 +864,7 @@ function buildDrawer(){const p=S.posts.get(ui.sel);if(!p){closeEditor();return}c
   const path="posts/"+p.id,instant=i=>i.tagName==="SELECT"||i.type==="date"||i.type==="time";
   $$("[data-f]",drawer).forEach(i=>{const k=i.dataset.f;i.addEventListener(instant(i)?"change":"input",()=>{
     queue(path,{[k]:i.value},instant(i)?0:600);
-    if(k==="legenda"){meta();refreshPrev()}if(k==="drive"){const ok=/^https?:\/\//.test(i.value);const a=$("#drivego");a.hidden=!ok;a.href=ok?i.value:"#"}
+    if(k==="legenda"){meta();refreshPrev()}if(k==="drive"){const ok=/^https?:\/\//.test(i.value);const a=$("#drivego");a.hidden=!ok;a.href=ok?i.value:"#";const dt=$("#drivethumb");if(dt)dt.innerHTML=dthumbHTML(i.value);S.posts.get(p.id)&&(S.posts.get(p.id).drive=i.value);refreshPrev();render()}
     if(k==="data"||k==="hora")refreshPrev();if(k==="pilar"){const e=$(".dhead .eyebrow",drawer);if(e)e.textContent=(TIPN[S.posts.get(p.id).tipo]||"Post")+(i.value?" · "+i.value:"")}
     if(["titulo","status","data","hora","pilar"].includes(k)){render();renderMini()}})});
   $$("[data-tipo]",drawer).forEach(b=>b.onclick=()=>{queue(path,{tipo:b.dataset.tipo},0);$$("[data-tipo]",drawer).forEach(x=>x.setAttribute("aria-pressed",x===b));mbox();refreshPrev();render()});
