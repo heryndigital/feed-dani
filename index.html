@@ -615,6 +615,17 @@ function doRender(){const a=document.activeElement;
   if(!S.loaded.posts){view.innerHTML=S.failed?`<div class="notice">Ainda não foi possível carregar o planejamento. Verifique a conexão; a página tenta de novo sozinha.</div>`:'<div class="skel" aria-label="Carregando o planejamento"></div>';return}
   if(user&&!S.posts.size&&!S.dest.size){view.innerHTML=`<div class="notice"><span class="eyebrow">Primeiro acesso</span><h3 style="margin-top:8px">O banco está <i>vazio</i></h3><p>Importe os posts, a bio e os destaques que já estavam planejados.</p><button class="btn primary" id="seedb">Importar dados iniciais</button></div>`;$("#seedb").onclick=importSeed;return}
   ({posts:vPosts,calendario:vCal,feed:vFeed,destaques:vDest})[ui.route]();window.scrollTo({top:y})}
+async function checkUpdate(){const old=$("#updbar");if(old)old.remove();if(!user||!db)return;
+  try{const r=await fetch("atualizacao.json",{cache:"no-store"});if(!r.ok)return;const u=await r.json();
+    const m=await db.collection("meta").doc("sync").get();if(m.exists&&m.data().rev===u.rev)return;
+    const bar=document.createElement("div");bar.id="updbar";bar.className="notice";
+    bar.style.cssText="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;display:flex;gap:16px;align-items:center;flex-wrap:wrap;box-shadow:0 12px 40px rgba(60,40,20,.18);max-width:92vw";
+    bar.innerHTML=`<span><b>Atualização disponível:</b> ${esc(u.descricao||"")}</span><button class="btn primary" id="updb">Aplicar</button>`;document.body.appendChild(bar);
+    $("#updb").onclick=async()=>{const b=$("#updb");b.disabled=true;b.textContent="Aplicando…";
+      try{const batch=db.batch();Object.entries(u.dados).forEach(([col,docs])=>Object.entries(docs).forEach(([id,v])=>batch.set(db.collection(col).doc(id),v,{merge:true})));
+        batch.set(db.collection("meta").doc("sync"),{rev:u.rev,at:new Date().toISOString()});await batch.commit();bar.remove();toast("Atualização aplicada")}
+      catch(e){b.disabled=false;b.textContent="Aplicar";toast(e&&e.code==="permission-denied"?"Sua conta não tem permissão. Confira o e-mail nas regras do Firestore.":"Não foi possível aplicar. Tente de novo.")}}
+  }catch(e){}}
 async function importSeed(){const b=$("#seedb");b.disabled=true;b.textContent="Importando…";
   try{const r=await fetch("seed.json");const d=await r.json();const batch=db.batch();
     Object.entries(d).forEach(([col,docs])=>Object.entries(docs).forEach(([id,v])=>batch.set(db.collection(col).doc(id),v)));await batch.commit();toast("Dados importados")}
@@ -897,7 +908,7 @@ function startFirebase(){if(!window.firebase){db=null;render();setLive();return}
   try{firebase.initializeApp(FIREBASE_CONFIG);db=firebase.firestore();}catch(e){db=null;render();setLive();return}
   assets=true;applyRole();setLive();subscribe();render();
   const auth=firebase.auth(),dlg=$("#login");
-  auth.onAuthStateChanged(u=>{user=u;applyRole();render();if(ui.sel)buildDrawer()});
+  auth.onAuthStateChanged(u=>{user=u;applyRole();render();if(ui.sel)buildDrawer();checkUpdate()});
   $("#authbtn").onclick=()=>{if(user){auth.signOut().then(()=>toast("Você saiu. Agora o app está só para visualização."));return}$("#lg-err").textContent="";dlg.showModal();setTimeout(()=>$("#lg-email").focus(),50)};
   $("#lg-cancel").onclick=()=>dlg.close();
   $("#loginf").onsubmit=e=>{e.preventDefault();const go=$("#lg-go");go.disabled=true;$("#lg-err").textContent="";
